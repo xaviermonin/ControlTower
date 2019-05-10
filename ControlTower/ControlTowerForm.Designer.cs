@@ -47,9 +47,9 @@
             this.tabPageMitm = new System.Windows.Forms.TabPage();
             this.tabPageArpPoisoning = new System.Windows.Forms.TabPage();
             this.tabPageRouter = new System.Windows.Forms.TabPage();
+            this.tabPageDnsPoisoning = new System.Windows.Forms.TabPage();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.tabPageDnsPoisoning = new System.Windows.Forms.TabPage();
             this.tabControl.SuspendLayout();
             this.tabPageHosts.SuspendLayout();
             this.groupBox_import_export.SuspendLayout();
@@ -102,7 +102,7 @@
             this.button_exporter.Name = "button_exporter";
             this.button_exporter.Size = new System.Drawing.Size(75, 23);
             this.button_exporter.TabIndex = 1;
-            this.button_exporter.Text = "Exporter";
+            this.button_exporter.Text = "Export";
             this.button_exporter.UseVisualStyleBackColor = true;
             this.button_exporter.Click += new System.EventHandler(this.button_export_Click);
             // 
@@ -112,7 +112,7 @@
             this.button_importer.Name = "button_importer";
             this.button_importer.Size = new System.Drawing.Size(75, 23);
             this.button_importer.TabIndex = 0;
-            this.button_importer.Text = "Importer";
+            this.button_importer.Text = "Import";
             this.button_importer.UseVisualStyleBackColor = true;
             this.button_importer.Click += new System.EventHandler(this.Button_importer_Click);
             // 
@@ -133,13 +133,13 @@
             this.groupBox_scan.TabStop = false;
             this.groupBox_scan.Text = "Scan IP adress range";
             // 
-            // checkBox_resoudre_nom
+            // checkBoxResolveHostname
             // 
             this.checkBoxResolveHostname.AutoSize = true;
             this.checkBoxResolveHostname.Checked = true;
             this.checkBoxResolveHostname.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxResolveHostname.Location = new System.Drawing.Point(350, 21);
-            this.checkBoxResolveHostname.Name = "checkBox_resoudre_nom";
+            this.checkBoxResolveHostname.Name = "checkBoxResolveHostname";
             this.checkBoxResolveHostname.Size = new System.Drawing.Size(114, 17);
             this.checkBoxResolveHostname.TabIndex = 5;
             this.checkBoxResolveHostname.Text = "Resolve hostname";
@@ -253,6 +253,15 @@
             this.tabPageRouter.Text = "Router";
             this.tabPageRouter.UseVisualStyleBackColor = true;
             // 
+            // tabPageDnsPoisoning
+            // 
+            this.tabPageDnsPoisoning.Location = new System.Drawing.Point(4, 22);
+            this.tabPageDnsPoisoning.Name = "tabPageDnsPoisoning";
+            this.tabPageDnsPoisoning.Size = new System.Drawing.Size(1039, 588);
+            this.tabPageDnsPoisoning.TabIndex = 6;
+            this.tabPageDnsPoisoning.Text = "DNS Poisoning";
+            this.tabPageDnsPoisoning.UseVisualStyleBackColor = true;
+            // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "Cible 1";
@@ -262,15 +271,6 @@
             // 
             this.columnHeader2.Text = "Cible 2";
             this.columnHeader2.Width = 312;
-            // 
-            // tabPageDnsPoisoning
-            // 
-            this.tabPageDnsPoisoning.Location = new System.Drawing.Point(4, 22);
-            this.tabPageDnsPoisoning.Name = "tabPageDnsPoisoning";
-            this.tabPageDnsPoisoning.Size = new System.Drawing.Size(1039, 588);
-            this.tabPageDnsPoisoning.TabIndex = 6;
-            this.tabPageDnsPoisoning.Text = "DNS Poisoning";
-            this.tabPageDnsPoisoning.UseVisualStyleBackColor = true;
             // 
             // ControlTowerForm
             // 
