@@ -17,7 +17,8 @@ namespace ControlTower.Network
     {
         public static IEnumerable<LibPcapLiveDevice> GetLibPcapLiveEthernetDevices()
         {
-            return LibPcapLiveDeviceList.Instance.Where(device => !device.Loopback && device.Addresses.Count() > 0);
+            return LibPcapLiveDeviceList.Instance.Where(device => !device.Loopback && device.Addresses.Count() > 0 &&
+                                                        device.Addresses.Any(a => a.Addr.type == Sockaddr.AddressTypes.AF_INET_AF_INET6));
         }
 
         public static List<Host> GetLocalArpTable()
@@ -124,20 +125,20 @@ namespace ControlTower.Network
 
         public static IPAddress GeIPv4Address(PcapDevice device)
         {
-            IPAddress localIP = null;
+            IPAddress localIpAdress = null;
 
             if (device.Interface.Addresses.Count > 0)
             {
-                localIP = device.Interface.Addresses
+                localIpAdress = device.Interface.Addresses
                                 .Where(a => a.Addr.type == Sockaddr.AddressTypes.AF_INET_AF_INET6 &&
                                             a.Addr.ipAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                                 .Select(b => b.Addr.ipAddress).Single();
                 
-                if (localIP == null)
-                    localIP = System.Net.IPAddress.Parse("127.0.0.1");
+                if (localIpAdress == null)
+                    localIpAdress = System.Net.IPAddress.Parse("127.0.0.1");
             }
 
-            return localIP;
+            return localIpAdress;
         }
 
         public static IPAddressInfo GetIPAddressInfo(PcapDevice device)
@@ -193,7 +194,6 @@ namespace ControlTower.Network
             return new IPAddress(byte_ip_start);
         }
 
-        /*
         public static IPAddress GeMaskAddress(PcapDevice device)
         {
             IPAddress mask = null;
@@ -216,8 +216,7 @@ namespace ControlTower.Network
             }
 
             return mask;
-        }
-        */
+        }     
 
         public static IPAddress GetNextIP(IPAddress ip)
         {
