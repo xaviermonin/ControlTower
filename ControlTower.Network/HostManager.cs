@@ -21,9 +21,8 @@ namespace ControlTower
 
             for (int i = 0; i < Hosts.Count(); i++)
             {
-                if (host.IpAddress.Equals(Hosts[i].IpAddress) &&
-                    host.MacAddress.Equals(Hosts[i].MacAddress) &&
-                    host.Name != Hosts[i].Name)
+                if (host.IpAddress.Equals(Hosts[i].IpAddress) ||
+                    host.MacAddress.Equals(Hosts[i].MacAddress))
                 {
                     Hosts[i] = host;
                     return;

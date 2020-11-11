@@ -70,9 +70,10 @@
             this.columnHeader_new_ip_src,
             this.columnHeader_new_ip_dst});
             this.listView_routes.FullRowSelect = true;
-            this.listView_routes.Location = new System.Drawing.Point(0, 0);
+            this.listView_routes.HideSelection = false;
+            this.listView_routes.Location = new System.Drawing.Point(3, 3);
             this.listView_routes.Name = "listView_routes";
-            this.listView_routes.Size = new System.Drawing.Size(810, 343);
+            this.listView_routes.Size = new System.Drawing.Size(1602, 606);
             this.listView_routes.TabIndex = 0;
             this.listView_routes.UseCompatibleStateImageBehavior = false;
             this.listView_routes.View = System.Windows.Forms.View.Details;
@@ -118,9 +119,9 @@
             this.groupBox_ajout.Controls.Add(this.button_ajouter);
             this.groupBox_ajout.Controls.Add(this.groupBox_new_route);
             this.groupBox_ajout.Controls.Add(this.groupBox_filtre);
-            this.groupBox_ajout.Location = new System.Drawing.Point(0, 349);
+            this.groupBox_ajout.Location = new System.Drawing.Point(0, 615);
             this.groupBox_ajout.Name = "groupBox_ajout";
-            this.groupBox_ajout.Size = new System.Drawing.Size(807, 201);
+            this.groupBox_ajout.Size = new System.Drawing.Size(1602, 201);
             this.groupBox_ajout.TabIndex = 2;
             this.groupBox_ajout.TabStop = false;
             this.groupBox_ajout.Text = "Routes";
@@ -129,7 +130,7 @@
             // 
             this.button_start.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button_start.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_start.Location = new System.Drawing.Point(724, 162);
+            this.button_start.Location = new System.Drawing.Point(1519, 162);
             this.button_start.Name = "button_start";
             this.button_start.Size = new System.Drawing.Size(75, 23);
             this.button_start.TabIndex = 4;
@@ -180,7 +181,7 @@
             this.groupBox_new_route.Controls.Add(this.label_new_ip_src);
             this.groupBox_new_route.Location = new System.Drawing.Point(7, 97);
             this.groupBox_new_route.Name = "groupBox_new_route";
-            this.groupBox_new_route.Size = new System.Drawing.Size(792, 47);
+            this.groupBox_new_route.Size = new System.Drawing.Size(1587, 47);
             this.groupBox_new_route.TabIndex = 5;
             this.groupBox_new_route.TabStop = false;
             this.groupBox_new_route.Text = "New route";
@@ -192,8 +193,8 @@
             this.comboBox_new_ip_dst.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox_new_ip_dst.FormattingEnabled = true;
             this.comboBox_new_ip_dst.Items.AddRange(new object[] {
-            "Inchangé"});
-            this.comboBox_new_ip_dst.Location = new System.Drawing.Point(467, 17);
+            "Unchanged"});
+            this.comboBox_new_ip_dst.Location = new System.Drawing.Point(1262, 17);
             this.comboBox_new_ip_dst.MaxLength = 15;
             this.comboBox_new_ip_dst.Name = "comboBox_new_ip_dst";
             this.comboBox_new_ip_dst.Size = new System.Drawing.Size(319, 21);
@@ -208,11 +209,11 @@
             this.comboBox_new_ip_src.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox_new_ip_src.FormattingEnabled = true;
             this.comboBox_new_ip_src.Items.AddRange(new object[] {
-            "Inchangé"});
+            "Unchanged"});
             this.comboBox_new_ip_src.Location = new System.Drawing.Point(82, 17);
             this.comboBox_new_ip_src.MaxLength = 15;
             this.comboBox_new_ip_src.Name = "comboBox_new_ip_src";
-            this.comboBox_new_ip_src.Size = new System.Drawing.Size(294, 21);
+            this.comboBox_new_ip_src.Size = new System.Drawing.Size(1089, 21);
             this.comboBox_new_ip_src.TabIndex = 7;
             this.comboBox_new_ip_src.Text = "Unchanged";
             // 
@@ -220,7 +221,7 @@
             // 
             this.label_new_ip_dst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_new_ip_dst.AutoSize = true;
-            this.label_new_ip_dst.Location = new System.Drawing.Point(382, 20);
+            this.label_new_ip_dst.Location = new System.Drawing.Point(1177, 20);
             this.label_new_ip_dst.Name = "label_new_ip_dst";
             this.label_new_ip_dst.Size = new System.Drawing.Size(76, 13);
             this.label_new_ip_dst.TabIndex = 9;
@@ -247,20 +248,20 @@
             this.groupBox_filtre.Controls.Add(this.label_provenance);
             this.groupBox_filtre.Location = new System.Drawing.Point(6, 19);
             this.groupBox_filtre.Name = "groupBox_filtre";
-            this.groupBox_filtre.Size = new System.Drawing.Size(793, 72);
+            this.groupBox_filtre.Size = new System.Drawing.Size(1588, 72);
             this.groupBox_filtre.TabIndex = 4;
             this.groupBox_filtre.TabStop = false;
             this.groupBox_filtre.Text = "Filter";
             // 
-            // comboBox_from
+            // comboBoxFrom
             // 
             this.comboBoxFrom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxFrom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFrom.FormattingEnabled = true;
             this.comboBoxFrom.Location = new System.Drawing.Point(83, 13);
-            this.comboBoxFrom.Name = "comboBox_from";
-            this.comboBoxFrom.Size = new System.Drawing.Size(704, 21);
+            this.comboBoxFrom.Name = "comboBoxFrom";
+            this.comboBoxFrom.Size = new System.Drawing.Size(1499, 21);
             this.comboBoxFrom.TabIndex = 8;
             // 
             // comboBox_ip_dst
@@ -270,8 +271,8 @@
             this.comboBox_ip_dst.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox_ip_dst.FormattingEnabled = true;
             this.comboBox_ip_dst.Items.AddRange(new object[] {
-            "Toutes"});
-            this.comboBox_ip_dst.Location = new System.Drawing.Point(468, 44);
+            "All"});
+            this.comboBox_ip_dst.Location = new System.Drawing.Point(1263, 44);
             this.comboBox_ip_dst.MaxLength = 15;
             this.comboBox_ip_dst.Name = "comboBox_ip_dst";
             this.comboBox_ip_dst.Size = new System.Drawing.Size(319, 21);
@@ -286,11 +287,11 @@
             this.comboBox_ip_src.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox_ip_src.FormattingEnabled = true;
             this.comboBox_ip_src.Items.AddRange(new object[] {
-            "Toutes"});
+            "All"});
             this.comboBox_ip_src.Location = new System.Drawing.Point(83, 44);
             this.comboBox_ip_src.MaxLength = 15;
             this.comboBox_ip_src.Name = "comboBox_ip_src";
-            this.comboBox_ip_src.Size = new System.Drawing.Size(294, 21);
+            this.comboBox_ip_src.Size = new System.Drawing.Size(1089, 21);
             this.comboBox_ip_src.TabIndex = 6;
             this.comboBox_ip_src.Text = "All";
             // 
@@ -298,7 +299,7 @@
             // 
             this.label_ip_dst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_ip_dst.AutoSize = true;
-            this.label_ip_dst.Location = new System.Drawing.Point(383, 47);
+            this.label_ip_dst.Location = new System.Drawing.Point(1178, 47);
             this.label_ip_dst.Name = "label_ip_dst";
             this.label_ip_dst.Size = new System.Drawing.Size(76, 13);
             this.label_ip_dst.TabIndex = 5;
@@ -331,7 +332,7 @@
             this.Controls.Add(this.listView_routes);
             this.MinimumSize = new System.Drawing.Size(810, 350);
             this.Name = "RouterUserControl";
-            this.Size = new System.Drawing.Size(810, 553);
+            this.Size = new System.Drawing.Size(1608, 819);
             this.groupBox_ajout.ResumeLayout(false);
             this.groupBox_new_route.ResumeLayout(false);
             this.groupBox_new_route.PerformLayout();

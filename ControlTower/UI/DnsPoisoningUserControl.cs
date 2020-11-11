@@ -17,7 +17,7 @@ namespace ControlTower
         {
             InitializeComponent();
         }
-        private void button_ajouter_Click(object sender, EventArgs e)
+        private void button_add_Click(object sender, EventArgs e)
         {
             IPAddress address;
 
@@ -30,12 +30,12 @@ namespace ControlTower
             textBox_select_ip.BackColor = SystemColors.Window;
 
             dns_poisoning.Resolutions.Add(textBox_select.Text, address);
-            majListView();
+            UpdateListView();
         }
 
         private DnsPoisoning dns_poisoning = new DnsPoisoning();
 
-        private void majListView()
+        private void UpdateListView()
         {
             listView.Items.Clear();
             foreach (KeyValuePair<string, IPAddress> paire in dns_poisoning.Resolutions)
@@ -46,16 +46,16 @@ namespace ControlTower
             }
         }
 
-        private void button_activer_Click(object sender, EventArgs e)
+        private void button_start_Click(object sender, EventArgs e)
         {
-            if (button_activer.Text == "Activer")
+            if (button_activer.Text == "Start")
             {
-                button_activer.Text = "Désactiver";
+                button_activer.Text = "Stop";
                 Router.Instance.ReceivedPacked += dns_poisoning.Poison;
             }
             else
             {
-                button_activer.Text = "Activer";
+                button_activer.Text = "Start";
                 Router.Instance.ReceivedPacked -= dns_poisoning.Poison;
             }
         }

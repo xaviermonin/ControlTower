@@ -18,7 +18,7 @@ namespace ControlTower
         {
             InitializeComponent();
 
-            tabPageMitm.Controls.Add(new ManInTheMiddleUserControl());
+            //tabPageMitm.Controls.Add(new ManInTheMiddleUserControl());
             tabPageArpPoisoning.Controls.Add(new ArpPoisoningUserControl());
             tabPageRouter.Controls.Add(new RouterUserControl());
             tabPageDnsPoisoning.Controls.Add(new DnsPoisoningUserControl());
@@ -44,6 +44,19 @@ namespace ControlTower
                 if (uc != null)
                     uc.Device = device;
             }
+
+            var macAddress = NetUtils.GetPhysicalAddress(device);
+            var ipAddress = NetUtils.GetIPAddressInfo(device);
+
+            HostManager.Instance.AddHost(this, new HostEventArgs()
+            {
+                Host = new Host()
+                {
+                    IpAddress = ipAddress.IPAddress,
+                    MacAddress = macAddress,
+                    Name = $"<This computer>"
+                }
+            });
         }
 
         private void buttonScanner_Click(object sender, EventArgs e)

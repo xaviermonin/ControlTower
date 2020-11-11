@@ -18,8 +18,21 @@ namespace ControlTower.UI
             listViewInterfaces.ItemChecked += ListViewInterfaces_ItemChecked;
         }
 
+        bool _doCheck = true;
+
         private void ListViewInterfaces_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
+            if (!_doCheck)
+                return;
+
+            _doCheck = false;
+            foreach (ListViewItem lvi in listViewInterfaces.Items)
+            {
+                if (lvi != e.Item)
+                    lvi.Checked = false;
+            }
+            _doCheck = true;
+
             if (e.Item.Checked)
                 Device = NetUtils.GetLibPcapLiveEthernetDevices().Single(d => d.Name == e.Item.Text);
 

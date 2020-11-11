@@ -40,6 +40,7 @@
             this.listViewInterfaces.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewInterfaces.CausesValidation = false;
             this.listViewInterfaces.CheckBoxes = true;
             this.listViewInterfaces.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeaderName,

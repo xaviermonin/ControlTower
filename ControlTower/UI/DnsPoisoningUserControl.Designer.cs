@@ -45,13 +45,13 @@
             // button_activer
             // 
             this.button_activer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_activer.Location = new System.Drawing.Point(1418, 600);
+            this.button_activer.Location = new System.Drawing.Point(1524, 786);
             this.button_activer.Name = "button_activer";
             this.button_activer.Size = new System.Drawing.Size(75, 23);
             this.button_activer.TabIndex = 0;
             this.button_activer.Text = "Start";
             this.button_activer.UseVisualStyleBackColor = true;
-            this.button_activer.Click += new System.EventHandler(this.button_activer_Click);
+            this.button_activer.Click += new System.EventHandler(this.button_start_Click);
             // 
             // listView
             // 
@@ -61,9 +61,10 @@
             this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader_nom,
             this.columnHeader_ip});
+            this.listView.HideSelection = false;
             this.listView.Location = new System.Drawing.Point(3, 0);
             this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(1496, 542);
+            this.listView.Size = new System.Drawing.Size(1602, 728);
             this.listView.TabIndex = 1;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
@@ -82,13 +83,13 @@
             // button_ajouter
             // 
             this.button_ajouter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_ajouter.Location = new System.Drawing.Point(1414, 13);
+            this.button_ajouter.Location = new System.Drawing.Point(1520, 13);
             this.button_ajouter.Name = "button_ajouter";
             this.button_ajouter.Size = new System.Drawing.Size(78, 23);
             this.button_ajouter.TabIndex = 2;
             this.button_ajouter.Text = "Add";
             this.button_ajouter.UseVisualStyleBackColor = true;
-            this.button_ajouter.Click += new System.EventHandler(this.button_ajouter_Click);
+            this.button_ajouter.Click += new System.EventHandler(this.button_add_Click);
             // 
             // groupBox_selection
             // 
@@ -100,9 +101,9 @@
             this.groupBox_selection.Controls.Add(this.button_ajouter);
             this.groupBox_selection.Controls.Add(this.textBox_select);
             this.groupBox_selection.Controls.Add(this.button_appliquer);
-            this.groupBox_selection.Location = new System.Drawing.Point(3, 548);
+            this.groupBox_selection.Location = new System.Drawing.Point(3, 734);
             this.groupBox_selection.Name = "groupBox_selection";
-            this.groupBox_selection.Size = new System.Drawing.Size(1496, 46);
+            this.groupBox_selection.Size = new System.Drawing.Size(1602, 46);
             this.groupBox_selection.TabIndex = 7;
             this.groupBox_selection.TabStop = false;
             this.groupBox_selection.Text = "Domain";
@@ -142,7 +143,7 @@
             // button_appliquer
             // 
             this.button_appliquer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_appliquer.Location = new System.Drawing.Point(1333, 13);
+            this.button_appliquer.Location = new System.Drawing.Point(1439, 13);
             this.button_appliquer.Name = "button_appliquer";
             this.button_appliquer.Size = new System.Drawing.Size(78, 23);
             this.button_appliquer.TabIndex = 2;
@@ -157,7 +158,7 @@
             this.Controls.Add(this.listView);
             this.Controls.Add(this.button_activer);
             this.Name = "DnsPoisoningUserControl";
-            this.Size = new System.Drawing.Size(1502, 633);
+            this.Size = new System.Drawing.Size(1608, 819);
             this.groupBox_selection.ResumeLayout(false);
             this.groupBox_selection.PerformLayout();
             this.ResumeLayout(false);

@@ -35,21 +35,24 @@ namespace ControlTower
         
         private void buttonAddTargets_Click(object sender, EventArgs e)
         {
-            Host target1 = null;
-            Host target2 = null;
+            Host hostSayTo = null;
+            Host hostThat = null;
+            Host hostIs = null;
 
             foreach (Host host in HostManager.Instance.Hosts)
             {
-                if (host.Equals(comboBoxTarget1.SelectedItem))
-                    target1 = host;
-                if (host.Equals(comboBoxTarget2.SelectedItem))
-                    target2 = host;
+                if (host.Equals(comboBoxSayTo.SelectedItem))
+                    hostSayTo = host;
+                if (host.Equals(comboBoxThat.SelectedItem))
+                    hostThat = host;
+                if (host.Equals(comboBoxIs.SelectedItem))
+                    hostIs = host;
             }
 
-            if (target1 == null || target2 == null)
+            if (hostSayTo == null || hostThat == null || hostIs == null)
                 return;
 
-            ArpPoisoning arp_poisoning = new ArpPoisoning(target1, target2);
+            ArpPoisoning arp_poisoning = new ArpPoisoning(hostSayTo, hostThat, hostIs);
             arp_poisoning.StatusChanged += UpdateStatut;
             _list_arp_poisonning.Add(arp_poisoning);
 
@@ -79,14 +82,26 @@ namespace ControlTower
             }*/
         }
 
-        private int? SelectedItem
+        private int SelectedIndice
         {
             get
             {
                 if (listView.SelectedIndices.Count == 0)
-                    return null;
+                    return -1;
 
                 return listView.SelectedIndices[0];
+            }
+        }
+
+        private ArpPoisoning SelectedItem
+        {
+            get
+            {
+                int indice = SelectedIndice;
+                if (indice != -1)
+                    return _list_arp_poisonning[indice];
+                else
+                    return null;
             }
         }
 
@@ -102,14 +117,14 @@ namespace ControlTower
             if (InvokeRequired)
             {
                 Invoke(new HostManager.HostAddedDelegate(AddHostToComboBox), sender, eventArgs);
-
                 return;
             }
 
             Host host = eventArgs.Host;
 
-            comboBoxTarget1.Items.Add(host);
-            comboBoxTarget2.Items.Add(host);
+            comboBoxSayTo.Items.Add(host);
+            comboBoxThat.Items.Add(host);
+            comboBoxIs.Items.Add(host);
         }
 
         private void UpdateView()
@@ -123,8 +138,9 @@ namespace ControlTower
             listView.Items.Clear();
             foreach (ArpPoisoning arp_poisoning in _list_arp_poisonning)
             {
-                ListViewItem item = new ListViewItem(arp_poisoning.Target1.ToString());
-                item.SubItems.Add(arp_poisoning.Target2.ToString());
+                ListViewItem item = new ListViewItem(arp_poisoning.Target.ToString());
+                item.SubItems.Add(arp_poisoning.Sender.ToString());
+                item.SubItems.Add(arp_poisoning.FalsifiedSender.ToString());
                 item.SubItems.Add(arp_poisoning.IsRunning ? "Enabled" : "Disabled");
 
                 listView.Items.Add(item);
@@ -149,30 +165,53 @@ namespace ControlTower
         {
             if (e.KeyCode == Keys.Delete)
             {
-                int indice = listView.SelectedIndices[0];
-
-                ArpPoisoning arp_poisoning = _list_arp_poisonning[indice];
-                arp_poisoning.StatusChanged -= UpdateStatut;
-                arp_poisoning.Stop();
-
-                _list_arp_poisonning.RemoveAt(indice);
-
-                UpdateView();
-                UpdateSelection();
+                RemoveSelectedItem();
 
                 e.Handled = true;
             }
         }
 
+        private void RemoveSelectedItem()
+        {
+            int indice = SelectedIndice;
+            if (indice == -1) return;
+
+            ArpPoisoning arp_poisoning = SelectedItem;
+            arp_poisoning.StatusChanged -= UpdateStatut;
+            arp_poisoning.Stop();
+
+            _list_arp_poisonning.RemoveAt(indice);
+
+            UpdateView();
+            UpdateSelection();
+        }
+
         private void ListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Nullable<int> indice = SelectedItem;
+            int? indice = SelectedIndice;
+
+            if (indice == null)
+                return;
+
+            comboBoxSayTo.SelectedItem = _list_arp_poisonning[indice.Value].Target;
+            comboBoxThat.SelectedItem = _list_arp_poisonning[indice.Value].Sender;
+            comboBoxIs.SelectedItem = _list_arp_poisonning[indice.Value].FalsifiedSender;
         }
 
         private void buttonStop_Click(object sender, EventArgs e)
         {
             foreach (ArpPoisoning arp_poisoning in _list_arp_poisonning)
                 arp_poisoning.Stop();
+        }
+
+        private void Button_modifier_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Button_supprimer_Click(object sender, EventArgs e)
+        {
+            RemoveSelectedItem();
         }
     }
 }
