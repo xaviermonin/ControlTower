@@ -132,11 +132,11 @@ namespace ControlTower.Network
                 localIpAdress = device.Interface.Addresses
                                 .Where(a => a.Addr.type == Sockaddr.AddressTypes.AF_INET_AF_INET6 &&
                                             a.Addr.ipAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                                .Select(b => b.Addr.ipAddress).Single();
-                
-                if (localIpAdress == null)
-                    localIpAdress = System.Net.IPAddress.Parse("127.0.0.1");
+                                .Select(b => b.Addr.ipAddress).FirstOrDefault();                
             }
+
+            if (localIpAdress == null)
+                localIpAdress = IPAddress.Parse("127.0.0.1");
 
             return localIpAdress;
         }
