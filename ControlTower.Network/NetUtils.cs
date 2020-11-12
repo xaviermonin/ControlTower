@@ -1,15 +1,12 @@
-﻿using System;
+﻿using ControlTower.Data;
+using ControlTower.Network.Data;
+using SharpPcap.LibPcap;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using SharpPcap;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
-using SharpPcap.LibPcap;
-using ControlTower.Data;
-using ControlTower.Network.Data;
-using ControlTower.Network;
 
 namespace ControlTower.Network
 {
@@ -93,9 +90,11 @@ namespace ControlTower.Network
                     if (table[index].dwType != IpHlpApiWrapper.MIB_IPNET_TYPE_INVALID &&
                         !mac.Equals(PhysicalAddress.Parse("000000000000")))
                     {
-                        Host hote = new Host();
-                        hote.IpAddress = ip;
-                        hote.MacAddress = mac;
+                        Host hote = new Host
+                        {
+                            IpAddress = ip,
+                            MacAddress = mac
+                        };
                         liste.Add(hote);
                     }
                 }
@@ -132,7 +131,7 @@ namespace ControlTower.Network
                 localIpAdress = device.Interface.Addresses
                                 .Where(a => a.Addr.type == Sockaddr.AddressTypes.AF_INET_AF_INET6 &&
                                             a.Addr.ipAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                                .Select(b => b.Addr.ipAddress).FirstOrDefault();                
+                                .Select(b => b.Addr.ipAddress).FirstOrDefault();
             }
 
             if (localIpAdress == null)
@@ -145,21 +144,20 @@ namespace ControlTower.Network
         {
             PcapAddress pcap_address = null;
 
-            if (device.Interface.Addresses.Count == 0)
-                throw new InvalidOperationException("Aucune adresse IP dans l'interface.");
-
             pcap_address = device.Interface.Addresses
                                 .Where(a => a.Addr.type == Sockaddr.AddressTypes.AF_INET_AF_INET6 &&
                                             a.Addr.ipAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                                .SingleOrDefault();
+                                .FirstOrDefault();
 
             if (pcap_address == null)
                 throw new InvalidOperationException("IP address not found");
 
-            IPAddressInfo ipaddressinfo = new IPAddressInfo();
-            ipaddressinfo.IPAddress = pcap_address.Addr.ipAddress;
-            ipaddressinfo.Mask = pcap_address.Netmask.ipAddress;
-            ipaddressinfo.Gateway = device.Interface.GatewayAddresses.Single();
+            IPAddressInfo ipaddressinfo = new IPAddressInfo
+            {
+                IPAddress = pcap_address.Addr.ipAddress,
+                Mask = pcap_address.Netmask.ipAddress,
+                Gateway = device.Interface.GatewayAddresses?.FirstOrDefault()
+            };
 
             ipaddressinfo.IPNetwork = GetNetworkAddress(ipaddressinfo.Mask, ipaddressinfo.IPAddress);
             ipaddressinfo.IPBroadcast = GetBroadcastAddress(ipaddressinfo.Mask, ipaddressinfo.IPAddress);
@@ -211,12 +209,12 @@ namespace ControlTower.Network
 
                 if (mask == null)
                 {
-                    mask = System.Net.IPAddress.Parse("255.255.255.0");
+                    mask = IPAddress.Parse("255.255.255.0");
                 }
             }
 
             return mask;
-        }     
+        }
 
         public static IPAddress GetNextIP(IPAddress ip)
         {
