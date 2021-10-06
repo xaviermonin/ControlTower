@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SharpPcap" Version="4.6.1" />
+    <PackageReference Include="PacketDotNet" Version="1.3.0" />
+    <PackageReference Include="SharpPcap" Version="6.1.0" />
   </ItemGroup>
 
 </Project>

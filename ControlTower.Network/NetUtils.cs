@@ -14,13 +14,14 @@ namespace ControlTower.Network
     {
         public static IEnumerable<LibPcapLiveDevice> GetLibPcapLiveEthernetDevices()
         {
-            return LibPcapLiveDeviceList.Instance.Where(device => !device.Loopback && device.Addresses.Count() > 0 &&
-                                                        device.Addresses.Any(a => a.Addr.type == Sockaddr.AddressTypes.AF_INET_AF_INET6));
+            return LibPcapLiveDeviceList.Instance
+                .Where(device => !device.Loopback && device.Addresses.Count() > 0 &&
+                                 device.Addresses.Any(a => a.Addr.type == Sockaddr.AddressTypes.AF_INET_AF_INET6));
         }
 
-        public static List<Host> GetLocalArpTable()
+        public static IEnumerable<Host> GetLocalArpTable()
         {
-            List<Host> liste = new List<Host>();
+            List<Host> hosts = new List<Host>();
 
             // The number of bytes needed.
             int bytesNeeded = 0;
@@ -71,31 +72,36 @@ namespace ControlTower.Network
                 for (int index = 0; index < entries; index++)
                 {
                     // Call PtrToStructure, getting the structure information.
-                    table[index] = (IpHlpApiWrapper.MIB_IPNETROW)Marshal.PtrToStructure(new
-                       IntPtr(currentBuffer.ToInt64() + (index *
-                       Marshal.SizeOf(typeof(IpHlpApiWrapper.MIB_IPNETROW)))), typeof(IpHlpApiWrapper.MIB_IPNETROW));
+                    table[index] = (IpHlpApiWrapper.MIB_IPNETROW)Marshal.PtrToStructure(
+                        new IntPtr(currentBuffer.ToInt64() + (index * Marshal.SizeOf(typeof(IpHlpApiWrapper.MIB_IPNETROW)))),
+                        typeof(IpHlpApiWrapper.MIB_IPNETROW)
+                    );
                 }
 
-                for (int index = 0; index < entries; index++)
+                foreach (var entry in table)
                 {
-                    uint adr = (uint)table[index].dwAddr;
+                    uint adr = (uint)entry.dwAddr;
                     IPAddress ip = new IPAddress(adr);
 
-                    byte[] byte_mac = { table[index].mac0, table[index].mac1,
-                                           table[index].mac2, table[index].mac3,
-                                           table[index].mac4, table[index].mac5 };
+                    byte[] byte_mac = {
+                        entry.mac0,
+                        entry.mac1,
+                        entry.mac2,
+                        entry.mac3,
+                        entry.mac4,
+                        entry.mac5
+                    };
 
                     PhysicalAddress mac = new PhysicalAddress(byte_mac);
 
-                    if (table[index].dwType != IpHlpApiWrapper.MIB_IPNET_TYPE_INVALID &&
-                        !mac.Equals(PhysicalAddress.Parse("000000000000")))
+                    if (entry.dwType != IpHlpApiWrapper.MIB_IPNET_TYPE_INVALID &&
+                        !mac.Equals(PhysicalAddress.None))
                     {
-                        Host hote = new Host
+                        hosts.Add(new Host
                         {
                             IpAddress = ip,
                             MacAddress = mac
-                        };
-                        liste.Add(hote);
+                        });
                     }
                 }
             }
@@ -105,7 +111,7 @@ namespace ControlTower.Network
                 Marshal.FreeCoTaskMem(buffer);
             }
 
-            return liste;
+            return hosts;
         }
 
         public static PhysicalAddress GetPhysicalAddress(PcapDevice device)
@@ -129,13 +135,13 @@ namespace ControlTower.Network
             if (device.Interface.Addresses.Count > 0)
             {
                 localIpAdress = device.Interface.Addresses
-                                .Where(a => a.Addr.type == Sockaddr.AddressTypes.AF_INET_AF_INET6 &&
-                                            a.Addr.ipAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                                .Select(b => b.Addr.ipAddress).FirstOrDefault();
+                    .Where(a => a.Addr.type == Sockaddr.AddressTypes.AF_INET_AF_INET6 &&
+                                a.Addr.ipAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                    .Select(b => b.Addr.ipAddress).FirstOrDefault();
             }
 
             if (localIpAdress == null)
-                localIpAdress = IPAddress.Parse("127.0.0.1");
+                localIpAdress = IPAddress.Loopback;
 
             return localIpAdress;
         }
@@ -145,9 +151,9 @@ namespace ControlTower.Network
             PcapAddress pcap_address = null;
 
             pcap_address = device.Interface.Addresses
-                                .Where(a => a.Addr.type == Sockaddr.AddressTypes.AF_INET_AF_INET6 &&
-                                            a.Addr.ipAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                                .FirstOrDefault();
+                .Where(a => a.Addr.type == Sockaddr.AddressTypes.AF_INET_AF_INET6 &&
+                            a.Addr.ipAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                .FirstOrDefault();
 
             if (pcap_address == null)
                 throw new InvalidOperationException("IP address not found");
@@ -184,36 +190,12 @@ namespace ControlTower.Network
         {
             byte[] byte_mask = mask.GetAddressBytes();
             byte[] byte_ip_start = { 0, 0, 0, 0 };
-            byte[] byte_ip_network = ip.GetAddressBytes(); // IPv4 CARTE
+            byte[] byte_ip_network = ip.GetAddressBytes(); // IPv4 Card
 
             for (int i = 0; i < 4; i++)
                 byte_ip_start[i] = (byte)(byte_mask[i] & byte_ip_network[i]);
 
             return new IPAddress(byte_ip_start);
-        }
-
-        public static IPAddress GeMaskAddress(PcapDevice device)
-        {
-            IPAddress mask = null;
-
-            if (device.Interface.Addresses.Count > 0)
-            {
-                foreach (var address in device.Interface.Addresses)
-                {
-                    if (address.Addr.type == Sockaddr.AddressTypes.AF_INET_AF_INET6)
-                    {
-                        mask = address.Netmask.ipAddress;
-                        break; // break out of the foreach
-                    }
-                }
-
-                if (mask == null)
-                {
-                    mask = IPAddress.Parse("255.255.255.0");
-                }
-            }
-
-            return mask;
         }
 
         public static IPAddress GetNextIP(IPAddress ip)

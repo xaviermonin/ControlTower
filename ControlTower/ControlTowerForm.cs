@@ -24,7 +24,7 @@ namespace ControlTower
             tabPageDnsPoisoning.Controls.Add(new DnsPoisoningUserControl());
 
             scanner.StatusChanged += UpdateButton;
-            scanner.HostFind += HostManager.Instance.AddHost;
+            scanner.HostFind += (sender, eventArg) => HostManager.Instance.AddHost(eventArg.Host);
 
             HostManager.Instance.HostAdded += AddHostToListView;
         }
@@ -40,23 +40,20 @@ namespace ControlTower
 
             foreach (TabPage tab in tabControl.TabPages)
             {
-                var uc = tab.Controls[0] as ControlTowerUserControl;
-                if (uc != null)
+                if (tab.Controls[0] is ControlTowerUserControl uc)
                     uc.Device = device;
             }
 
             var macAddress = NetUtils.GetPhysicalAddress(device);
             var ipAddress = NetUtils.GetIPAddressInfo(device);
 
-            HostManager.Instance.AddHost(this, new HostEventArgs()
-            {
-                Host = new Host()
+            HostManager.Instance.AddHost(
+                new Host()
                 {
                     IpAddress = ipAddress.IPAddress,
                     MacAddress = macAddress,
                     Name = $"<This computer>"
-                }
-            });
+                });
         }
 
         private void buttonScanner_Click(object sender, EventArgs e)

@@ -15,7 +15,7 @@ namespace ControlTower
 
         public void Poison(ref IPv4Packet packet)
         {
-            UdpPacket udp_packet = packet.Extract(typeof(UdpPacket)) as UdpPacket;
+            UdpPacket udp_packet = packet.Extract<UdpPacket>();
             
             if (udp_packet == null || udp_packet.SourcePort != 53)
                 return;
@@ -27,9 +27,7 @@ namespace ControlTower
             {
                 foreach (DNSResourceRecord record in dnsRequest.Answers)
                 {
-                    RFC1035.A field_a = record.Details as RFC1035.A;
-
-                    if (field_a == null)
+                    if (!(record.Details is RFC1035.A field_a))
                         continue;
 
                     Debug.Print("Domain name: {0}", record.Name);
@@ -45,8 +43,8 @@ namespace ControlTower
                     break;
             }
 
-            if (updated)
-                udp_packet = new UdpPacket(new PacketDotNet.Utils.ByteArraySegment(dnsRequest.ToByte()));
+            //if (updated)
+            //    udp_packet = new UdpPacket(new PacketDotNet.Utils.ByteArraySegment(dnsRequest.ToByte()));
         }
 
         public Dictionary<string, IPAddress> Resolutions {get; private set;}

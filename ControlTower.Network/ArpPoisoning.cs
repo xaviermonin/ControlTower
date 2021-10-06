@@ -24,6 +24,8 @@ namespace ControlTower
             FalsifiedSender = falsifiedSender;
         }
 
+        private LibPcapLiveDevice _device;
+
         public LibPcapLiveDevice Device
         {
             get;
@@ -46,7 +48,7 @@ namespace ControlTower
 
         protected override void Run()
         {
-            _device.Open(DeviceMode.Promiscuous, 50);
+            _device.Open(DeviceModes.Promiscuous, 50);
 
             // Création de de l'entrée.
             Packet arpPacket = CreateArpPacket(Sender.IpAddress, FalsifiedSender.MacAddress, Target.IpAddress, Target.MacAddress);
@@ -65,11 +67,9 @@ namespace ControlTower
         private Packet CreateArpPacket(IPAddress senderIpAddress, PhysicalAddress senderPhysicalAddress,
                                        IPAddress targetIpAddress, PhysicalAddress targetPhysicalAddress)
         {
-            var arpPacket = new ARPPacket(ARPOperation.Request, PhysicalAddress.Parse("000000000000"), targetIpAddress, senderPhysicalAddress, senderIpAddress);
+            var arpPacket = new ArpPacket(ArpOperation.Request, PhysicalAddress.None, targetIpAddress, senderPhysicalAddress, senderIpAddress);
 
-            return new EthernetPacket(_device.MacAddress, targetPhysicalAddress, EthernetPacketType.Arp) { PayloadPacket = arpPacket };
+            return new EthernetPacket(_device.MacAddress, targetPhysicalAddress, EthernetType.Arp) { PayloadPacket = arpPacket };
         }
-
-        private ICaptureDevice _device;
     }
 }

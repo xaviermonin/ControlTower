@@ -14,11 +14,6 @@ namespace ControlTower
         public delegate void HostFindDelegate(object sender, HostEventArgs eventArgs);
         public event HostFindDelegate HostFind;
 
-        public Scanner()
-        {
-            
-        }
-
         public LibPcapLiveDevice Device
         {
             get;
@@ -31,7 +26,6 @@ namespace ControlTower
 
         protected override void OnStarting()
         {
-            // Vérification de la plage d'IP.
             byte[] byte_start = StartIp.GetAddressBytes();
             byte[] byte_end = EndIp.GetAddressBytes();
 
@@ -52,8 +46,13 @@ namespace ControlTower
         {
             EndIp = NetUtils.GetNextIP(EndIp);
 
-            ARP arp = new ARP(Device);
-            arp.Timeout = new TimeSpan(0, 0, 0, 0, 200);
+            ARP arp = new ARP(Device)
+            {
+                Timeout = new TimeSpan(0, 0, 0, 0, 200)
+            };
+
+            // TODO: Filter by interface
+            // HostManager.Instance.AddHosts(NetUtils.GetLocalArpTable());
 
             do
             {
@@ -64,18 +63,20 @@ namespace ControlTower
 
                 if (physicalAddress == null)
                     continue;
-                
-                Host host = new Host();
-                host.IpAddress = current_ip;
-                host.MacAddress = physicalAddress;
+
+                Host host = new Host
+                {
+                    IpAddress = current_ip,
+                    MacAddress = physicalAddress
+                };
 
                 if (ResolveHostname)
                 {
-                    string nom = string.Empty;
-                    try { nom = System.Net.Dns.GetHostEntry(host.IpAddress).HostName; } catch { }
+                    string hostName = string.Empty;
+                    try { hostName = Dns.GetHostEntry(host.IpAddress).HostName; } catch { }
 
-                    if (nom != host.IpAddress.ToString())
-                        host.Name = nom;
+                    if (hostName != host.IpAddress.ToString())
+                        host.Name = hostName;
                 }
 
                 HostFind?.Invoke(this, new HostEventArgs() { Host = host});
@@ -83,7 +84,7 @@ namespace ControlTower
             } while (!(current_ip = NetUtils.GetNextIP(current_ip)).Equals(EndIp));
         }
 
-        public List<Host> Hotes { get; } = new List<Host>();
+        public List<Host> Hosts { get; } = new List<Host>();
 
         public bool ResolveHostname { get; set; } = true;
 

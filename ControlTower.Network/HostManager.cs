@@ -15,10 +15,8 @@ namespace ControlTower
         public delegate void HostAddedDelegate(object sender, HostEventArgs eventArgs);
         public event HostAddedDelegate HostAdded;
 
-        public void AddHost(object sender, HostEventArgs eventArgs)
+        public void AddHost(Host host)
         {
-            Host host = eventArgs.Host;
-
             for (int i = 0; i < Hosts.Count(); i++)
             {
                 if (host.IpAddress.Equals(Hosts[i].IpAddress) ||
@@ -32,6 +30,12 @@ namespace ControlTower
             Hosts.Add(host);
 
             HostAdded?.Invoke(this, new HostEventArgs() { Host = host });
+        }
+
+        public void AddHosts(IEnumerable<Host> hosts)
+        {
+            foreach (var host in hosts)
+                AddHost(host);
         }
 
         public static HostManager Instance
