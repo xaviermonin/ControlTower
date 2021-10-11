@@ -22,6 +22,7 @@ namespace ControlTower
             tabPageArpPoisoning.Controls.Add(new ArpPoisoningUserControl());
             tabPageRouter.Controls.Add(new RouterUserControl());
             tabPageDnsPoisoning.Controls.Add(new DnsPoisoningUserControl());
+            tabPageArpCommunicator.Controls.Add(new ArpCommunicatorUserControl());
 
             scanner.StatusChanged += UpdateButton;
             scanner.HostFind += (sender, eventArg) => HostManager.Instance.AddHost(eventArg.Host);

@@ -107,6 +107,12 @@
     <Compile Include="UI\ControlTowerUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UI\ArpCommunicatorUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\ArpCommunicatorUserControl.Designer.cs">
+      <DependentUpon>ArpCommunicatorUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\DnsPoisoningUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -141,6 +147,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="UI\ArpPoisoningUserControl.resx">
       <DependentUpon>ArpPoisoningUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ArpCommunicatorUserControl.resx">
+      <DependentUpon>ArpCommunicatorUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\DnsPoisoningUserControl.resx">
       <DependentUpon>DnsPoisoningUserControl.cs</DependentUpon>

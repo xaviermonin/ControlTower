@@ -31,6 +31,8 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageHosts = new System.Windows.Forms.TabPage();
             this.groupBox_import_export = new System.Windows.Forms.GroupBox();
+            this.button_exporter = new System.Windows.Forms.Button();
+            this.button_importer = new System.Windows.Forms.Button();
             this.groupBox_scan = new System.Windows.Forms.GroupBox();
             this.checkBoxResolveHostname = new System.Windows.Forms.CheckBox();
             this.label_ip_fin = new System.Windows.Forms.Label();
@@ -47,8 +49,7 @@
             this.tabPageDnsPoisoning = new System.Windows.Forms.TabPage();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button_exporter = new System.Windows.Forms.Button();
-            this.button_importer = new System.Windows.Forms.Button();
+            this.tabPageArpCommunicator = new System.Windows.Forms.TabPage();
             this.tabControl.SuspendLayout();
             this.tabPageHosts.SuspendLayout();
             this.groupBox_import_export.SuspendLayout();
@@ -64,6 +65,7 @@
             this.tabControl.Controls.Add(this.tabPageArpPoisoning);
             this.tabControl.Controls.Add(this.tabPageRouter);
             this.tabControl.Controls.Add(this.tabPageDnsPoisoning);
+            this.tabControl.Controls.Add(this.tabPageArpCommunicator);
             this.tabControl.Location = new System.Drawing.Point(0, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -77,7 +79,7 @@
             this.tabPageHosts.Controls.Add(this.listView_hotes);
             this.tabPageHosts.Location = new System.Drawing.Point(4, 22);
             this.tabPageHosts.Name = "tabPageHosts";
-            this.tabPageHosts.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageHosts.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageHosts.Size = new System.Drawing.Size(804, 476);
             this.tabPageHosts.TabIndex = 0;
             this.tabPageHosts.Text = "Hosts";
@@ -94,6 +96,27 @@
             this.groupBox_import_export.TabIndex = 5;
             this.groupBox_import_export.TabStop = false;
             this.groupBox_import_export.Text = "Import/Export";
+            // 
+            // button_exporter
+            // 
+            this.button_exporter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_exporter.Location = new System.Drawing.Point(160, 21);
+            this.button_exporter.Name = "button_exporter";
+            this.button_exporter.Size = new System.Drawing.Size(75, 23);
+            this.button_exporter.TabIndex = 3;
+            this.button_exporter.Text = "Export";
+            this.button_exporter.UseVisualStyleBackColor = true;
+            // 
+            // button_importer
+            // 
+            this.button_importer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_importer.Enabled = false;
+            this.button_importer.Location = new System.Drawing.Point(6, 21);
+            this.button_importer.Name = "button_importer";
+            this.button_importer.Size = new System.Drawing.Size(75, 23);
+            this.button_importer.TabIndex = 2;
+            this.button_importer.Text = "Import";
+            this.button_importer.UseVisualStyleBackColor = true;
             // 
             // groupBox_scan
             // 
@@ -208,7 +231,7 @@
             // 
             this.tabPageArpPoisoning.Location = new System.Drawing.Point(4, 22);
             this.tabPageArpPoisoning.Name = "tabPageArpPoisoning";
-            this.tabPageArpPoisoning.Size = new System.Drawing.Size(885, 562);
+            this.tabPageArpPoisoning.Size = new System.Drawing.Size(804, 476);
             this.tabPageArpPoisoning.TabIndex = 4;
             this.tabPageArpPoisoning.Text = "ARP Poisoning";
             this.tabPageArpPoisoning.UseVisualStyleBackColor = true;
@@ -217,7 +240,7 @@
             // 
             this.tabPageRouter.Location = new System.Drawing.Point(4, 22);
             this.tabPageRouter.Name = "tabPageRouter";
-            this.tabPageRouter.Size = new System.Drawing.Size(885, 562);
+            this.tabPageRouter.Size = new System.Drawing.Size(804, 476);
             this.tabPageRouter.TabIndex = 5;
             this.tabPageRouter.Text = "Router";
             this.tabPageRouter.UseVisualStyleBackColor = true;
@@ -226,7 +249,7 @@
             // 
             this.tabPageDnsPoisoning.Location = new System.Drawing.Point(4, 22);
             this.tabPageDnsPoisoning.Name = "tabPageDnsPoisoning";
-            this.tabPageDnsPoisoning.Size = new System.Drawing.Size(885, 562);
+            this.tabPageDnsPoisoning.Size = new System.Drawing.Size(804, 476);
             this.tabPageDnsPoisoning.TabIndex = 6;
             this.tabPageDnsPoisoning.Text = "DNS Poisoning";
             this.tabPageDnsPoisoning.UseVisualStyleBackColor = true;
@@ -241,26 +264,14 @@
             this.columnHeader2.Text = "Cible 2";
             this.columnHeader2.Width = 312;
             // 
-            // button_exporter
+            // tabPageArpCommunicator
             // 
-            this.button_exporter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_exporter.Location = new System.Drawing.Point(160, 21);
-            this.button_exporter.Name = "button_exporter";
-            this.button_exporter.Size = new System.Drawing.Size(75, 23);
-            this.button_exporter.TabIndex = 3;
-            this.button_exporter.Text = "Export";
-            this.button_exporter.UseVisualStyleBackColor = true;
-            // 
-            // button_importer
-            // 
-            this.button_importer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_importer.Enabled = false;
-            this.button_importer.Location = new System.Drawing.Point(6, 21);
-            this.button_importer.Name = "button_importer";
-            this.button_importer.Size = new System.Drawing.Size(75, 23);
-            this.button_importer.TabIndex = 2;
-            this.button_importer.Text = "Import";
-            this.button_importer.UseVisualStyleBackColor = true;
+            this.tabPageArpCommunicator.Location = new System.Drawing.Point(4, 22);
+            this.tabPageArpCommunicator.Name = "tabPageArpCommunicator";
+            this.tabPageArpCommunicator.Size = new System.Drawing.Size(804, 476);
+            this.tabPageArpCommunicator.TabIndex = 7;
+            this.tabPageArpCommunicator.Text = "Arp Communicator";
+            this.tabPageArpCommunicator.UseVisualStyleBackColor = true;
             // 
             // ControlTowerForm
             // 
@@ -305,6 +316,7 @@
         private System.Windows.Forms.TabPage tabPageDnsPoisoning;
         private System.Windows.Forms.Button button_exporter;
         private System.Windows.Forms.Button button_importer;
+        private System.Windows.Forms.TabPage tabPageArpCommunicator;
     }
 }
 

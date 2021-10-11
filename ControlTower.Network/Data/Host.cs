@@ -21,14 +21,24 @@ namespace ControlTower.Network.Data
             set { mac = value; mac_address = mac.ToString(); }
         }
 
+        public override int GetHashCode()
+        {
+            return IpAddress.GetHashCode() + MacAddress.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Host host))
+                return false;
+
+            return IpAddress.Equals(host.IpAddress) && MacAddress.Equals(host.MacAddress);
+        }
+
         public string Name { get; set; }
 
         public override string ToString()
         {
-            if (Name != string.Empty)
-                return Name + ' ' + IpAddress.ToString();
-            else
-                return IpAddress.ToString();
+            return string.Join(Name, IpAddress.ToString());
         }
 
         [NonSerialized]
