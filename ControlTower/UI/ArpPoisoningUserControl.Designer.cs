@@ -55,7 +55,7 @@
             this.groupBox_activation_mtm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox_activation_mtm.Controls.Add(this.button_desactiver_ts);
             this.groupBox_activation_mtm.Controls.Add(this.button_activer_ts_mtm);
-            this.groupBox_activation_mtm.Location = new System.Drawing.Point(1286, 568);
+            this.groupBox_activation_mtm.Location = new System.Drawing.Point(1129, 681);
             this.groupBox_activation_mtm.Name = "groupBox_activation_mtm";
             this.groupBox_activation_mtm.Size = new System.Drawing.Size(316, 49);
             this.groupBox_activation_mtm.TabIndex = 12;
@@ -97,9 +97,9 @@
             this.groupBox_cible.Controls.Add(this.button_ajouter_mtm);
             this.groupBox_cible.Controls.Add(this.comboBoxSayTo);
             this.groupBox_cible.Controls.Add(this.comboBoxThat);
-            this.groupBox_cible.Location = new System.Drawing.Point(3, 485);
+            this.groupBox_cible.Location = new System.Drawing.Point(3, 598);
             this.groupBox_cible.Name = "groupBox_cible";
-            this.groupBox_cible.Size = new System.Drawing.Size(1605, 77);
+            this.groupBox_cible.Size = new System.Drawing.Size(1448, 77);
             this.groupBox_cible.TabIndex = 11;
             this.groupBox_cible.TabStop = false;
             this.groupBox_cible.Text = "Poisoning";
@@ -126,7 +126,7 @@
             // button_supprimer
             // 
             this.button_supprimer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_supprimer.Location = new System.Drawing.Point(1524, 48);
+            this.button_supprimer.Location = new System.Drawing.Point(1367, 48);
             this.button_supprimer.Name = "button_supprimer";
             this.button_supprimer.Size = new System.Drawing.Size(75, 23);
             this.button_supprimer.TabIndex = 9;
@@ -137,7 +137,7 @@
             // button_modifier
             // 
             this.button_modifier.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_modifier.Location = new System.Drawing.Point(1443, 48);
+            this.button_modifier.Location = new System.Drawing.Point(1286, 48);
             this.button_modifier.Name = "button_modifier";
             this.button_modifier.Size = new System.Drawing.Size(75, 23);
             this.button_modifier.TabIndex = 8;
@@ -166,7 +166,7 @@
             // button_ajouter_mtm
             // 
             this.button_ajouter_mtm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_ajouter_mtm.Location = new System.Drawing.Point(1362, 48);
+            this.button_ajouter_mtm.Location = new System.Drawing.Point(1205, 48);
             this.button_ajouter_mtm.Name = "button_ajouter_mtm";
             this.button_ajouter_mtm.Size = new System.Drawing.Size(75, 23);
             this.button_ajouter_mtm.TabIndex = 4;
@@ -211,7 +211,7 @@
             this.listView.Location = new System.Drawing.Point(0, 0);
             this.listView.MultiSelect = false;
             this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(1605, 479);
+            this.listView.Size = new System.Drawing.Size(1448, 592);
             this.listView.TabIndex = 10;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
@@ -246,7 +246,7 @@
             this.Controls.Add(this.listView);
             this.MinimumSize = new System.Drawing.Size(570, 350);
             this.Name = "ArpPoisoningUserControl";
-            this.Size = new System.Drawing.Size(1608, 632);
+            this.Size = new System.Drawing.Size(1451, 745);
             this.groupBox_activation_mtm.ResumeLayout(false);
             this.groupBox_cible.ResumeLayout(false);
             this.groupBox_cible.PerformLayout();
