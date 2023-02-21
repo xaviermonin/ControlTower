@@ -1,9 +1,29 @@
 # ControlTower
-Man in the middle. Provide Hosts scan, ARP Poisoning, Router and DNS Poisoning.
 
+This project provides some hack tools for local network:
+
+- Hosts scan
+
+  Scan hosts by using arp. Provides optionnal name resolution.
+- Man in the middle
+
+  Intercept traffic between 2 hosts.
+- ARP Poisoning
+
+  Modify ARP table of the target.
+- Router
+
+- DNS Poisoning
+
+  Modify DNS target. Must be used with MITM.
+- Arp communicator
+
+  Sending messages stealthily between 2 hosts using ARP.
+
+# Prerequisites
 Control Tower need NPCap or WinPCap and must be started with privilege elevation (UAC).
 
-## In use
+## Screenshots
 
 ### Host scan
 
